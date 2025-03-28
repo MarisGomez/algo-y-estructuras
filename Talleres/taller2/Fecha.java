@@ -39,7 +39,10 @@ public class Fecha {
     }
 
     public void incrementarDia() {
-        if(this.dia == diasEnMes(mes)){
+        if(this.dia == 31 && this.mes == 12){
+            dia = 1;
+            mes = 1;
+        }else if(this.dia == diasEnMes(mes)){
             dia = 1;
             mes += 1;
         } else {
