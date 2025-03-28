@@ -1,6 +1,7 @@
 package aed;
 
 public class Fecha {
+    public static Fecha fecha;
     private int dia;
     private int mes;
 
@@ -9,8 +10,10 @@ public class Fecha {
         this.mes = mes;
     }
 
-    public Fecha(Fecha fecha) { //Constructor
-        
+    public Fecha(Fecha otra) { //Constructor
+        this.dia = otra.dia();
+        this.mes = otra.mes();
+
     }
 
     public Integer dia() {
@@ -35,7 +38,7 @@ public class Fecha {
         }
     Fecha otraFecha = (Fecha) otra;
     
-    return dia == otraFecha.dia && mes == otraFecha.mes;
+    return dia == otraFecha.dia() && mes == otraFecha.mes();
     }
 
     public void incrementarDia() {
