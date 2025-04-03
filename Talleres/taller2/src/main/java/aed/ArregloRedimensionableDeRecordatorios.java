@@ -1,39 +1,50 @@
 package aed;
 
 class ArregloRedimensionableDeRecordatorios {
+    private Recordatorio[] recordatorios;
 
     public ArregloRedimensionableDeRecordatorios() {
-        // Implementar
+        this.recordatorios = new Recordatorio[0];
     }
 
     public int longitud() {
-        // Implementar
-        return -1;
+        return this.recordatorios.length;
     }
 
     public void agregarAtras(Recordatorio i) {
-        // Implementar
+        Recordatorio[] nuevo = new Recordatorio[recordatorios.length + 1];
+        for (int j = 0; j < recordatorios.length; j++) {
+            nuevo[j] = recordatorios[j];
+        }
+        nuevo[nuevo.length - 1] = i;
+        this.recordatorios = nuevo;
     }
 
     public Recordatorio obtener(int i) {
-        // Implementar
-        return null;
+        return this.recordatorios[i];
     }
 
     public void quitarAtras() {
-        // Implementar
+        Recordatorio[] nuevo = new Recordatorio[recordatorios.length - 1];
+        for (int j = 0; j < recordatorios.length - 1; j++) {
+            nuevo[j] = recordatorios[j];
+        }
+        this.recordatorios = nuevo;
     }
 
     public void modificarPosicion(int indice, Recordatorio valor) {
-        // Implementar
+        this.recordatorios[indice] = valor;
     }
 
     public ArregloRedimensionableDeRecordatorios(ArregloRedimensionableDeRecordatorios vector) {
-        // Implementar
+        this.recordatorios = vector.copiar().recordatorios;
     }
 
     public ArregloRedimensionableDeRecordatorios copiar() {
-        // Implementar
-        return null;
+        ArregloRedimensionableDeRecordatorios nuevoArreglo = new ArregloRedimensionableDeRecordatorios();
+        for (int i = 0; i < recordatorios.length; i ++) {
+            nuevoArreglo.agregarAtras(new Recordatorio(this.recordatorios[i].mensaje(), this.recordatorios[i].fecha(), this.recordatorios[i].horario()));
+        }
+        return nuevoArreglo;
     }
 }

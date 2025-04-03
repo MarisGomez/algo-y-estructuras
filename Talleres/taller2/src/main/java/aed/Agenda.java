@@ -1,28 +1,40 @@
 package aed;
 
 public class Agenda {
+    private Recordatorio[] recordatorios;
+    private Fecha fechaActual;
 
-    public Agenda(Fecha fechaActual) {
-        // Implementar
+    public Agenda(Fecha fechaActual) { //Constructor
+        this.fechaActual = fechaActual;
+        this.recordatorios = new Recordatorio[0];
     }
 
     public void agregarRecordatorio(Recordatorio recordatorio) {
-        // Implementar
+        Recordatorio[] nuevo = new Recordatorio[recordatorios.length + 1];
+        for (int i = 0; i < recordatorios.length; i++) {
+            nuevo[i] = recordatorios[i];
+        }
+        nuevo[nuevo.length - 1] = recordatorio;
+        this.recordatorios = nuevo;
     }
 
     @Override
     public String toString() {
-        // Implementar
-        return "";
+        String mensaje = fechaActual + "\n" + "=====" + "\n";
+        for (int i = 0; i < recordatorios.length; i++) {
+            if (this.recordatorios[i].fecha().dia() == fechaActual.dia() && this.recordatorios[i].fecha().mes() == fechaActual.mes()){
+                mensaje += this.recordatorios[i] + "\n";
+            }
+        }
+        return mensaje;
     }
 
     public void incrementarDia() {
-        // Implementar
+        this.fechaActual.incrementarDia();
     }
 
     public Fecha fechaActual() {
-        // Implementar
-        return null;
+        return this.fechaActual;
     }
 
 }

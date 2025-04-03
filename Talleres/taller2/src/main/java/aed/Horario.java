@@ -24,15 +24,9 @@ public class Horario {
 
     @Override
     public boolean equals(Object otro) {
-        boolean otroEsNull = (otro == null);
-        boolean claseDistinta = otro.getClass() != this.getClass();
-
-        if (otroEsNull || claseDistinta) {
-            return false;
-        }
-    Horario otroHorario = (Horario) otro;
+        if (otro == null || otro.getClass() != this.getClass()) return false;
+        Horario otroHorario = (Horario) otro;
     
-    return hora == otroHorario.hora && minutos == otroHorario.minutos;
+        return hora == otroHorario.hora && minutos == otroHorario.minutos;
     }
-
 }

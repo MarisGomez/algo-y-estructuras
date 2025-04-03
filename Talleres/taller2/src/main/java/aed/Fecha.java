@@ -28,15 +28,10 @@ public class Fecha {
 
     @Override
     public boolean equals(Object otra) {
-        boolean otroEsNull = (otra == null);
-        boolean claseDistinta = otra.getClass() != this.getClass();
-
-        if (otroEsNull || claseDistinta) {
-            return false;
-        }
-    Fecha otraFecha = (Fecha) otra;
+        if (otra == null || otra.getClass() != this.getClass()) return false;
+        Fecha otraFecha = (Fecha) otra;
     
-    return dia == otraFecha.dia() && mes == otraFecha.mes();
+        return dia == otraFecha.dia() && mes == otraFecha.mes();
     }
 
     public void incrementarDia() {
