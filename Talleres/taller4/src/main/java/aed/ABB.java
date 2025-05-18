@@ -14,7 +14,7 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
         Nodo der;
         Nodo padre;
 
-    public Nodo(T v) {
+    public Nodo(T v){
         this.valor = v;
         this.izq = null;
         this.der = null;
@@ -34,7 +34,7 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
     public T minimo(){
         if(cardinal == 0){
             return null;
-        }else {
+        }else{
             Nodo actual = this.raiz;
             while (actual.izq != null) {
                 actual = actual.izq;
@@ -67,9 +67,9 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
             nuevo.padre = padre;
             return nuevo;
         }
-        if (nodo.valor.compareTo(elem) > 0) {
+        if(nodo.valor.compareTo(elem) > 0){
             nodo.izq = insertarRec(nodo.izq, nodo, elem);
-        } else {
+        }else{
             nodo.der = insertarRec(nodo.der, nodo, elem);
         }
         return nodo;
@@ -83,11 +83,11 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
         if(nodo == null){
             return false;
         }
-        if (nodo.valor.compareTo(elem) == 0) {
+        if(nodo.valor.compareTo(elem) == 0){
             return true;
-        }else if (nodo.valor.compareTo(elem) > 0) {
+        }else if(nodo.valor.compareTo(elem) > 0){
             return perteneceRec(nodo.izq, elem);
-        }else {
+        }else{
             return perteneceRec(nodo.der, elem);
         }
     }
@@ -125,7 +125,7 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
         return nodo;
     }
 
-    private Nodo encontrarMin(Nodo nodo) {
+    public Nodo encontrarMin(Nodo nodo) {
         while (nodo.izq != null) {
             nodo = nodo.izq;
         }
@@ -133,18 +133,52 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
     }
 
     public String toString(){
-        throw new UnsupportedOperationException("No implementada aun");
+        if(this.cardinal == 0){
+            return "{}";
+        }else{
+            String conjunto = "{";
+            Nodo nodo = encontrarMin(this.raiz);
+            while(nodo != null){
+                conjunto += nodo.valor;
+                if(sucesorNodo(nodo) != null){
+                    conjunto += ",";
+                }
+                nodo = sucesorNodo(nodo);
+            }
+            conjunto += "}";
+            return conjunto;
+        }
+    }
+
+
+    public Nodo sucesorNodo(Nodo nodo) {
+        if (nodo.der != null) {
+            return encontrarMin(nodo.der);
+        }else{
+            Nodo padre = nodo.padre;
+            while (padre != null && nodo == padre.der) {
+                nodo = padre;
+                padre = padre.padre;
+            }
+            return padre;
+        }
     }
 
     private class ABB_Iterador implements Iterador<T> {
-        private Nodo _actual;
+        private Nodo actual;
+
+        public ABB_Iterador(){
+            this.actual = encontrarMin(raiz);
+        }
 
         public boolean haySiguiente() {            
-            throw new UnsupportedOperationException("No implementada aun");
+            return this.actual != null;
         }
     
         public T siguiente() {
-            throw new UnsupportedOperationException("No implementada aun");
+            Nodo ACTUAL = this.actual;
+            this.actual = sucesorNodo(actual);
+            return ACTUAL.valor;
         }
     }
 
